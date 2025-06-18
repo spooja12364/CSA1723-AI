@@ -1,0 +1,23 @@
+def vacuum_cleaner(location_A_dirty, location_B_dirty):
+    location = 'A'  # Start at location A
+    
+    while location_A_dirty or location_B_dirty:
+        if location == 'A':
+            if location_A_dirty:
+                print("Cleaning location A")
+                location_A_dirty = False
+            else:
+                print("Moving from A to B")
+                location = 'B'
+        else:  # location == 'B'
+            if location_B_dirty:
+                print("Cleaning location B")
+                location_B_dirty = False
+            else:
+                print("Moving from B to A")
+                location = 'A'
+    
+    print("All locations clean!")
+
+# Run the vacuum cleaner with both locations dirty initially
+vacuum_cleaner(location_A_dirty=True, location_B_dirty=True)
