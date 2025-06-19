@@ -1,0 +1,22 @@
+def water_jug():
+    a = 0  # Jug A (4 L)
+    b = 0  # Jug B (3 L)
+
+    while True:
+        print(f"Jug A: {a}L, Jug B: {b}L")
+
+        if a == 2:
+            print("Goal reached: 2L in Jug A")
+            break
+
+        # Steps based on common solution
+        if a == 0:
+            a = 4  # Fill Jug A
+        elif b != 3:
+            pour = min(a, 3 - b)  # Pour from A to B
+            a -= pour
+            b += pour
+        elif b == 3:
+            b = 0  # Empty Jug B
+
+water_jug()
