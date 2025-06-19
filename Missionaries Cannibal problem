@@ -1,0 +1,44 @@
+def is_safe(m_left, c_left, m_right, c_right):
+    if m_left < 0 or c_left < 0 or m_right < 0 or c_right < 0:
+        return False
+    if m_left > 0 and m_left < c_left:
+        return False
+    if m_right > 0 and m_right < c_right:
+        return False
+    return True
+
+def missionaries_cannibals():
+    start = (3, 3, 1)  # (missionaries left, cannibals left, boat side)
+    goal = (0, 0, 0)
+    states = [start]
+    visited = set()
+
+    # possible moves: (missionaries, cannibals)
+    moves = [(1,0), (2,0), (0,1), (0,2), (1,1)]
+
+    while states:
+        m_left, c_left, boat = states.pop(0)
+
+        if (m_left, c_left, boat) in visited:
+            continue
+        visited.add((m_left, c_left, boat))
+
+        print(f"Left: M={m_left}, C={c_left} | Right: M={3-m_left}, C={3-c_left} | Boat: {'Left' if boat else 'Right'}")
+
+        if (m_left, c_left, boat) == goal:
+            print("Reached goal!")
+            break
+
+        for m, c in moves:
+            if boat == 1:  # Boat on left side
+                new_state = (m_left - m, c_left - c, 0)
+            else:  # Boat on right side
+                new_state = (m_left + m, c_left + c, 1)
+
+            m_r = 3 - new_state[0]
+            c_r = 3 - new_state[1]
+
+            if is_safe(new_state[0], new_state[1], m_r, c_r):
+                states.append(new_state)
+
+missionaries_cannibals()
