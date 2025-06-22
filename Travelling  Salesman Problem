@@ -1,0 +1,19 @@
+from itertools import permutations
+
+# Distance matrix
+dist = [[0, 10, 15, 20],
+        [10, 0, 35, 25],
+        [15, 35, 0, 30],
+        [20, 25, 30, 0]]
+
+cities = [1, 2, 3]
+min_cost = float('inf')
+
+for perm in permutations(cities):
+    cost = dist[0][perm[0]] + dist[perm[0]][perm[1]] + dist[perm[1]][perm[2]] + dist[perm[2]][0]
+    if cost < min_cost:
+        min_cost = cost
+        best_path = [0] + list(perm) + [0]
+
+print("Minimum Cost:", min_cost)
+print("Path:", best_path)
