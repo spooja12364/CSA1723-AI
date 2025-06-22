@@ -1,0 +1,27 @@
+colors = ['Red', 'Green', 'Blue']
+
+# Map of Australia (abbreviated states)
+neighbors = {
+    'WA': ['NT', 'SA'],
+    'NT': ['WA', 'SA', 'Q'],
+    'SA': ['WA', 'NT', 'Q', 'NSW', 'V'],
+    'Q': ['NT', 'SA', 'NSW'],
+    'NSW': ['Q', 'SA', 'V'],
+    'V': ['SA', 'NSW'],
+    'T': []
+}
+
+def assign_color(state):
+    if len(state) == len(neighbors):
+        return state
+    region = [r for r in neighbors if r not in state][0]
+    for color in colors:
+        if all(state.get(n) != color for n in neighbors[region]):
+            state[region] = color
+            if assign_color(state):
+                return state
+            del state[region]
+    return None
+
+solution = assign_color({})
+print("Solution:", solution)
