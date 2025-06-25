@@ -1,0 +1,15 @@
+data = [
+    ([2], 'A'),
+    ([4], 'A'),
+    ([6], 'B'),
+    ([8], 'B'),
+]
+threshold = 5
+def predict(sample):
+    if sample[0] <= threshold:
+        return 'A'
+    else:
+        return 'B'
+test_samples = [[3], [7]]
+for s in test_samples:
+    print(f"Sample {s} predicted class: {predict(s)}")
