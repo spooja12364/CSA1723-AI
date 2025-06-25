@@ -1,0 +1,26 @@
+import math
+
+def sigmoid(x):
+    return 1 / (1 + math.exp(-x))
+
+def dot_product(v1, v2):
+    return sum([x*y for x, y in zip(v1, v2)])
+
+X = [
+    [0, 0],
+    [0, 1],
+    [1, 0],
+    [1, 1]
+]
+
+wh = [[0.1, 0.3], [0.4, 0.6]]
+bh = [0.1, 0.2]
+wo = [0.5, 0.7]
+bo = 0.3
+
+for inputs in X:
+    hidden_input = [dot_product(inputs, [wh[0][i], wh[1][i]]) + bh[i] for i in range(2)]
+    hidden_output = [sigmoid(x) for x in hidden_input]
+    output_input = dot_product(hidden_output, wo) + bo
+    output = sigmoid(output_input)
+    print(f"Input: {inputs} → Predicted Output: {round(output, 4)}")
