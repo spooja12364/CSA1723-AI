@@ -1,0 +1,3 @@
+fact(a).More actions
+rule(b) :- fact(a).
+rule(c) :- rule(b).
